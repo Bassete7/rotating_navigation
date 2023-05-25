@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating navigation</title>
+</head>
+
+<style>
+    *,::before,::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    body{
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+    }
+    .container{
+        background-color: #3d3d3d;
+        min-height: 100vh;
+    }
+    
+    .container .container__content{
+        background-color: #fff;
+        min-height: 100vh;
+        text-align: center;
+        padding: 5rem;
+        transition: transform .4s;
+        transform-origin: top left;
+    }
+    .container__content.rotate{
+        transform: rotate(-15deg);
+        transform-origin: top left;
+    }
+    .container .btn__container{
+        position: absolute;
+        top: 0;
+        top: -100px;
+        left: -100px;
+        z-index: 10;
+
+        background-color: #f42ccc;
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        cursor: pointer;
+        transform-origin: center;
+        transition: all .4s;
+    }
+    .container .btn__container.turn{
+        transform: rotate(-90deg);
+    }
+    .container .burger__btn{
+        width: 30px;
+        height: 3px;
+        background-color: #ffff;
+        border-radius: 20px;
+        position: relative;
+        right: -30%;
+        top: -30%;
+    }
+    .container .burger__btn::before{
+        content: '';
+        width: 30px;
+        height: 3px;
+        background-color: #ffff;
+        border-radius: 20px;
+        position: absolute;
+        left: 0;
+        top: 7px;
+        
+    }
+    .container .burger__btn::after{
+        content: '';
+        width: 30px;
+        height: 3px;
+        background-color: #ffff;
+        border-radius: 20px;
+        position: absolute;
+        left: 0;
+        top: -7px;
+        
+    }
+    .container .close__btn{
+        width: 30px;
+        height: 3px;
+        border-radius: 20px;
+        background-color: #fff;
+        transform: rotate(45deg);
+        position: relative;
+        right: 30%;
+        top: -30%;
+    }
+    .container .close__btn::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 3px;
+        border-radius: 20px;
+        background-color: #fff;
+        transform: rotate(90deg);
+    }
+    .container__menu{
+        position: absolute;
+        left: -100%;
+        bottom: 0;
+        transition: left .4s ease-out;
+    }
+    .container__menu.rotate{
+        left: 0;
+    }
+    .container__menu.rotate .container__menu-item:nth-of-type(2){
+        transform: translateX(1rem);
+        transition: transform .5s .4s;
+    }
+    .container__menu.rotate .container__menu-item:nth-of-type(3){
+        transform: translateX(1.7rem);
+        transition: transform .5s .4s;
+    }
+    .container__menu .container__menu-item{
+        color: white;
+    }
+    .container__menu .container__menu-item:not(:last-of-type){
+        margin-bottom: .7rem;
+    }
+</style>
+
+<body>
+    <div class="container">
+    
+            <div class="btn__container">
+                <div class="burger__btn"></div>
+                <div class="close__btn"></div>
+            </div>
+            <div class="container__content">
+                <h1>Hello there</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, autem illo aut optio quod, sequi dolor voluptates adipisci hic accusamus eaque molestiae tempora quos ipsum soluta ab? Quas, vitae iste!
+                    Distinctio eius odio minima libero quae, fuga ratione repudiandae nisi doloremque nesciunt eum similique laboriosam! Consequatur ipsa facilis, eveniet necessitatibus aliquam earum, doloremque explicabo soluta consequuntur voluptatum vero ipsum odio.
+                    Iste repellat placeat illum nihil repudiandae? Sapiente, harum facilis illo quasi obcaecati unde fugiat aperiam vel laboriosam consectetur, voluptatem nemo? Nulla distinctio saepe ex natus fugiat, voluptatibus ipsam possimus molestias.
+                </p>
+                <img src="./images/IMG-4.jpg" alt="filahi in McDonald's" aria-hidden="true" height="500">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                    Laboriosam quia totam dolorem natus minima dolor! Est repellendus id obcaecati maxime, consequatur iure dolores vitae accusamus laudantium, nesciunt mollitia eligendi vero.
+                </p>
+            </div>
+        
+            
+            <div class="container__menu">
+                <a href="#" class="container__menu-item">
+                    <box-icon type='solid' name='home' color="white"></box-icon>
+                    HOME
+                </a>
+                <a href="#" class="container__menu-item">
+                    <box-icon type='solid' name='user' color="white"></box-icon>
+                    ABOUT
+                </a>
+                <a href="#" class="container__menu-item">
+                    <box-icon name='envelope' type='solid' color="white"></box-icon>
+                    CONTACT
+                </a>
+            </div>
+        
+    </div>
+
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <script>
+        let menuBtn = document.querySelector('.btn__container');
+        let container = document.querySelector('.container__content');
+        let links = document.querySelector('.container__menu');
+
+        menuBtn.addEventListener('click', ()=>{
+            menuBtn.classList.toggle('turn');
+            container.classList.toggle('rotate');
+            links.classList.toggle('rotate');
+        })
+    </script>
+</body>
+
+
+</html>
